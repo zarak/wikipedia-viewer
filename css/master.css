@@ -1,0 +1,45 @@
+.search {
+  margin-top: 30vh;
+}
+
+#search-btn {
+  color: black;
+  background-color: transparent;
+  border-color: black;
+}
+
+#search-btn:hover {
+  color: #fff;
+  background-color: black;
+  border-color: black;
+}
+
+.row {
+  padding: 5px;
+}
+
+.item-title {
+  background-color: black;
+  color: white;
+  padding: 0 5px;
+}
+
+.item-description {
+  padding: 0 5px;
+}
+
+.item:hover {
+  border-right-style: solid;
+  border-left-style: solid;
+  border-color: black;
+  background-color: #e6e6e6;
+  border-width: 1px;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
