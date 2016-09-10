@@ -55,8 +55,6 @@ function generateResults(searchURI) {
 
 
 $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
-  
     var endpointURI = "https://en.wikipedia.org/w/api.php";
   
     // $('#random-btn').on('click', function() {
