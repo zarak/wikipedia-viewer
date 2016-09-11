@@ -17,17 +17,20 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script
 </head>
 <body>
   <div class="container-fluid">
-    <div class="search col-xs-10 col-xs-offset-1">
+    <div class="search col-md-8 col-md-offset-2">
       <div class="row">
-        <input id="searchField" type="text" class="form-control" placeholder="Search Wikipedia">
-      </div>
-      <div class="row">
-        <button id="search-btn" class="btn btn-default btn-block">Submit</button></div>
-      <div class="row random-article">
-        <p><a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Get a random Wikipedia article</a></p>
+        <div class="col-md-8 col-md-offset-2">
+          <div class="input-group">
+            <input id="searchField" type="text" class="form-control" placeholder="Search Wikipedia">
+            <div class="input-group-btn">
+              <button id="random-btn" type="button" class="btn btn-default" aria-label="Help"><span class="glyphicon glyphicon-question-sign"></span></button>
+              <button id="search-btn" class="btn btn-default">Submit</button>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="searchContainer row">
-        <h4 id="searchHeader"></h4>
+        <h3 id="searchHeader"></h3>
         <div id="searchResults"></div>
       </div>
     </div>

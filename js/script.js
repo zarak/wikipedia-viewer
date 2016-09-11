@@ -1,9 +1,36 @@
-function getImage(title) {
-  var requestURI = "https://crossorigin.me/https://en.wikipedia.org/w/api.php?action=query&titles=" + title + "&prop=pageimages&format=json&pithumbsize=100";
-  $.getJSON(requestURI, function(json) {
-    return json.query.pages[0].thumbnail.source;
-  });
+function getImage(title, imageDiv) {
+  $.getJSON("http://en.wikipedia.org/w/api.php?action=query&format=json&callback=?", {
+      titles: title,
+      prop: "pageimages",
+      pithumbsize: 150
+    },
+    function(data) {
+      var source = "";
+      var imageUrl = GetAttributeValue(data.query.pages);
+      if (imageUrl == "") {
+        $(imageDiv).append("<img src=\"https://placehold.it/150x150.jpg>\">");
+      } else {
+        var img = "<img src=\"" + imageUrl + "\">"
+        $(imageDiv).append(img);
+      }
+    }
+  );
+
+ function GetAttributeValue(data) {
+    var urli = "";
+      for (var key in data) {
+        if (data[key].thumbnail != undefined) {
+          if (data[key].thumbnail.source != undefined) {
+            urli = data[key].thumbnail.source;
+            break;
+          }
+        }
+      }
+    return urli;
+  }
+  
 }
+
 
 function generateResults(searchURI) {
   $.ajax({
@@ -23,6 +50,7 @@ function generateResults(searchURI) {
       for(var key in titleArray) {
         var li = document.createElement('li'),
             itemDiv = document.createElement('div'),
+            imageDiv = document.createElement('div'),
             titleDiv = document.createElement('div'),
             descriptionDiv = document.createElement('div'),
             p = document.createElement('p'),
@@ -30,18 +58,19 @@ function generateResults(searchURI) {
             description = document.createTextNode(descriptionArray[key]),
             itemLink = document.createElement('a');
 
-        itemDiv.className = "item";
+        imageDiv.id = "wiki";
+        itemDiv.className = "item row";
         titleDiv.className = "item-title";
         descriptionDiv.className = "item-description";
         itemLink.setAttribute("href", linksArray[key]);
         
-        var imageURI = getImage(titleArray[key]);
-        console.log(imageURI);
         
         li.appendChild(itemLink);
         itemLink.appendChild(itemDiv);
         itemDiv.appendChild(titleDiv);
         titleDiv.appendChild(title);
+        itemDiv.appendChild(imageDiv);
+        getImage(titleArray[key], imageDiv);
         itemDiv.appendChild(descriptionDiv);
         descriptionDiv.appendChild(p);
         p.appendChild(description);
@@ -57,9 +86,9 @@ function generateResults(searchURI) {
 $(document).ready(function(){
     var endpointURI = "https://en.wikipedia.org/w/api.php";
   
-    // $('#random-btn').on('click', function() {
-    // window.open("https://en.wikipedia.org/wiki/Special:Random");
-    //  });
+    $('#random-btn').on('click', function() {
+      window.open("https://en.wikipedia.org/wiki/Special:Random");
+    });
   
     $('#search-btn').on('click', function() {
       var searchString = document.getElementById("searchField").value;
@@ -72,5 +101,5 @@ $(document).ready(function(){
       }); // animate
       
     }); // search-btn click
-    
+
 }); // document ready
