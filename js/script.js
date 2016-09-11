@@ -6,7 +6,7 @@ function getImage(title, imageDiv) {
     },
     function(data) {
       var source = "";
-      var imageUrl = GetAttributeValue(data.query.pages);
+      var imageUrl = "https://crossorigin.me/" + GetAttributeValue(data.query.pages);
       if (imageUrl == "") {
         $(imageDiv).append("<img src=\"https://placehold.it/150x150.jpg>\">");
       } else {
