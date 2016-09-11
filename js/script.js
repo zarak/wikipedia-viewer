@@ -1,5 +1,5 @@
 function getImage(title, imageDiv) {
-  $.getJSON("http://en.wikipedia.org/w/api.php?action=query&format=json&callback=?", {
+  $.getJSON("https://en.wikipedia.org/w/api.php?action=query&format=json&callback=?", {
       titles: title,
       prop: "pageimages",
       pithumbsize: 150
